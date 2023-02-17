@@ -1,14 +1,22 @@
 import { Injectable } from '@nestjs/common';
-import { Directus } from '@directus/sdk';
-import { dir } from 'console';
+import { Directus, ID } from '@directus/sdk';
+import 'dotenv/config';
 
+  
+  const directus = new Directus('http://localhost:8055/');
 
- const directus = new Directus(process.env.DIRECTUS_URL);
 
 @Injectable()
 export class AppService {
   getHello(): string {
     return 'Hello Dang';
   }   
-  }
 
+ async getData() : Promise<any> {
+    return directus.
+    items('data')
+    .readOne(1)
+
+    
+  }
+}
